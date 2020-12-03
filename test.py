@@ -30,7 +30,7 @@ import os
 from options.test_options import TestOptions
 from data import create_dataset
 from models import create_model
-import util
+import util.util as util
 import ntpath
 from PIL import Image
 
@@ -71,7 +71,8 @@ if __name__ == '__main__':
             print('processing (%04d)-th image... %s' % (i, img_path))
         
         res_dir = os.path.join('./result',opt.name)
-        util.mkdirs(res_dir)
+        if not os.path.exists(res_dir):
+            os.mkdir(res_dir)
         name = os.path.splitext(ntpath.basename(img_path[0]))[0]
         for label,im_data in visuals.items():
             im = util.tensor2im(im_data) 

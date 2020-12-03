@@ -75,8 +75,11 @@ if __name__ == '__main__':
             os.mkdir(res_dir)
         name = os.path.splitext(ntpath.basename(img_path[0]))[0]
         for label,im_data in visuals.items():
+            if label=='real':
+                continue
             im = util.tensor2im(im_data) 
-            img_name = '%s_%s.png' % (name,label)
+            #img_name = '%s_%s.png' % (name,label)
+            img_name = name + '.png'
             save_path = os.path.join(res_dir,img_name)
 
             im_pil = Image.fromarray(im).resize((960,544),Image.BICUBIC)
